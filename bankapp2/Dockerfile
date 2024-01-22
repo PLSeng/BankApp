@@ -1,13 +1,9 @@
-# Use an official Java runtime as a parent image
-FROM openjdk:21
+FROM maven:3.8.5-openjdk-17 as BUILD
+COPY . .
+RUN mvn clean package -DskipTests
 
-# Set the working directory in the container
-WORKDIR /usr/src/
+FROM openjdk:17.0.1-jdk-slim
+COPY --from=BUILD /target/bankapp2-0.0.1-SNAPSHOT.jar bankapp2.jar
+EXPOSE 8080
+ENTRYPOINT ["java", "-jar", "bankapp2.jar"]
 
-RUN rm -rf /var/lib/apt/lists/*
-
-# Copy the JAR file into the container at /usr/src/app
-COPY target/bankapp2-0.0.1-SNAPSHOT.jar /usr/src/app
-
-# Run the JAR file
-ENTRYPOINT ["java", "-jar", "bankapp2-0.0.1-SNAPSHOT.jar"]
