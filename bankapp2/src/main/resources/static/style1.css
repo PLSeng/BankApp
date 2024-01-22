@@ -1,0 +1,170 @@
+body {
+    background: linear-gradient(45deg, #FF5733, #FFD700, #008000, #3333FF);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 10px;
+    max-width: 600px; /* Make the container wider */
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    text-align: center; /* Center the content horizontally */
+    position: relative; /* Allows for absolute positioning */
+}
+
+h2 {
+    font-size: 24px; /* Increase font size */
+    color: #333; /* Change text color */
+    padding: 10px; /* Add padding */
+    border-radius: 5px; /* Add border radius */
+    margin-bottom: 20px; /* Increase margin */
+}
+
+h1 {
+    font-size: 32px; /* Increase font size for the heading */
+    color: #333; /* Text color */
+}
+
+nav {
+    margin-top: 20px; /* Add margin at the top of the navigation */
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    justify-content: center; /* Center the navigation links horizontally */
+}
+
+nav li {
+    margin: 0 10px; /* Add spacing between navigation links */
+}
+
+nav a {
+    display: block;
+    text-decoration: none;
+    background-color: #008000;
+    color: #fff;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+nav a:hover {
+    background-color: #006400; /* Hover effect color */
+}
+
+form {
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 10px;
+    max-width: 400px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box; /* Ensures padding and borders don't affect the width */
+}
+
+button[type="submit"] {
+    background-color: #008000;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button[type="submit"]:hover {
+    background-color: #006400;
+}
+
+button[type="button"] {
+    background-color: #FF5733; /* Red background color */
+    color: #fff; /* White text color */
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button[type="button"]:hover {
+    background-color: #E60000; /* Hover effect color */
+}
+
+a {
+    display: block;
+    text-align: center;
+    margin-top: 10px;
+    color: #3333FF;
+    text-decoration: none;
+}
+
+.error-message {
+    background-color: #FF5733; /* Red background color for error messages */
+    color: #fff; /* White text color */
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 10px; /* Add margin at the top to separate from other content */
+    text-align: center; /* Center text horizontally */
+}
+
+.message {
+    background-color: #008000; /* Green background color for messages */
+    color: #fff; /* White text color */
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 10px; /* Add margin at the top to separate from other content */
+    text-align: center; /* Center text horizontally */
+}
+
+.user-details, .nav-container {
+    margin-bottom: 20px;
+}
+
+/* Style form fields and actions within the form container */
+.form-container {
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.form-field {
+    margin-bottom: 10px;
+}
+
+.form-actions {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.center-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

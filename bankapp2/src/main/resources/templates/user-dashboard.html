@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>User Dashboard</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/style1.css}"/>
+    <script type="text/javascript">
+        function showEditPasswordForm() {
+            document.getElementById('editPasswordForm').style.display = 'block';
+        }
+
+        function hideEditPasswordForm() {
+            document.getElementById('editPasswordForm').style.display = 'none';
+        }
+
+        function showDeleteAccountForm() {
+            document.getElementById('deleteAccountForm').style.display = 'block';
+        }
+
+        function hideDeleteAccountForm() {
+            document.getElementById('deleteAccountForm').style.display = 'none';
+        }
+    </script>
+</head>
+
+<body>
+<div class="container">
+    <h1>Welcome, <span th:text="${user.username}">User</span>!</h1>
+    <div class="user-details">
+        <h2>Your Account Details</h2>
+        <p>Balance: <span th:text="${user.balance}">0.00</span> USD</p>
+    </div>
+    <div class="nav-container">
+        <nav>
+            <ul>
+                <li><a href="/users/deposit">Deposit Funds</a></li>
+                <li><a href="/users/withdraw">Withdraw Funds</a></li>
+                <li><a href="/users/transfer">Transfer Funds</a></li>
+                <li><a href="#" onclick="showEditPasswordForm()">Edit Password</a></li>
+                <li><a href="#" onclick="showDeleteAccountForm()">Delete Account</a></li>
+                <li><a href="/users/logout">Logout</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <div class="error-message" th:if="${error}" th:text="${error}"></div>
+
+    <!-- Move the delete account form here -->
+    <div id="deleteAccountForm" style="display:none;" class="form-container center-buttons">
+        <h2>Delete Account</h2>
+        <p>Are you sure you want to delete your account? This action cannot be undone.</p>
+        <form class="container" th:action="@{/users/delete}" method="post">
+            <div class="form-actions">
+                <button type="submit">Confirm Deletion</button>
+                <button type="button" onclick="hideDeleteAccountForm()">Cancel</button>
+            </div>
+        </form>
+    </div>
+
+</div>
+
+<!-- Keep the edit password form in the previous location -->
+<div class="container">
+    <div id="editPasswordForm" style="display:none;" class="form-container">
+        <h2>Edit User Password</h2>
+        <form th:action="@{/users/updatePassword}" method="post">
+            <div class="form-field">
+                <label>Current Password:</label>
+                <input type="password" name="currentPassword" required />
+            </div>
+            <div class="form-field">
+                <label>New Password:</label>
+                <input type="password" name="newPassword" required />
+            </div>
+            <div class="form-actions">
+                <button type="submit">Update Password</button>
+                <button type="button" onclick="hideEditPasswordForm()">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>
