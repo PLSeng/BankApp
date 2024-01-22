@@ -7,10 +7,10 @@ This Project was built under the school assignment project.
 |**Name**|**ID**|
 |----------------------|---------------------|
 |1. PAV Limseng | e20211548|
-|2. KOSAL Chansothay||
+|2. KOSAL Chansothay|e20210574|
 |3. NGORN Panha|e20210134|
 |4. LUN Chanpoly|e20210684|
-|5. KONG Satta||
+|5. KONG Satta|e20120963|
 
 [**Goto Spring Site**](https://github.com/PLSeng/BankApp)
 
