@@ -1,6 +1,7 @@
 package com.ams.bankapp2.controller;
 
 import com.ams.bankapp2.database.DatabaseConnection;
+import com.ams.bankapp2.model.LogEntry;
 import com.ams.bankapp2.model.User;
 import com.ams.bankapp2.service.UserService;
 import jakarta.servlet.http.HttpSession;
@@ -9,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/users")
@@ -87,12 +90,13 @@ public class UserController {
     }
 
     @PostMapping("/deposit")
-    public String processDeposit(@RequestParam double amount, HttpSession session, Model model) {
+    public String processDeposit(@RequestParam double amount, HttpSession session, Model model, DatabaseConnection databaseConnection) {
         User user = (User) session.getAttribute("loggedUser");
-        if (user != null && userService.depositToUserAccount(user.getId(), amount)) {
+        if (user != null && userService.depositToUserAccount(user.getId(), amount, user.getUsername())) {
             User updatedUser = userService.getUserById(user.getId());
             session.setAttribute("loggedUser", updatedUser);
             model.addAttribute("user", updatedUser);
+            // Create and save a log entry for the deposit
             model.addAttribute("message", "Deposit successful");
         } else {
             model.addAttribute("error", "Deposit failed");
@@ -114,7 +118,7 @@ public class UserController {
     public String processWithdraw(@RequestParam double amount, @RequestParam String password, HttpSession session, Model model, RedirectAttributes redirectAttributes) {
         User user = (User) session.getAttribute("loggedUser");
         if (user != null && userService.validatePassword(user.getId(), password)) {
-            if (userService.withdrawFromUserAccount(user.getId(), amount)) {
+            if (userService.withdrawFromUserAccount(user.getId(), amount, user.getUsername())) {
                 User updatedUser = userService.getUserById(user.getId());
                 session.setAttribute("loggedUser", updatedUser);
                 model.addAttribute("user", updatedUser);
@@ -216,4 +220,15 @@ public class UserController {
         return "redirect:/users/login";
     }
 
+    @GetMapping("/log")
+    public String showUserLog(Model model, HttpSession session) {
+        User user = (User) session.getAttribute("loggedUser");
+        if (user != null) {
+            List<LogEntry> logEntries = userService.getLogEntriesByUsername(user.getUsername());
+            model.addAttribute("user", user);
+            model.addAttribute("logEntries", logEntries);
+            return "user-log"; // user-log.html Thymeleaf template
+        }
+        return "redirect:/users/login";
+    }
 }

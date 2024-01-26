@@ -1,5 +1,6 @@
 package com.ams.bankapp2.database;
 
+import com.ams.bankapp2.model.LogEntry;
 import com.ams.bankapp2.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -7,9 +8,11 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository
@@ -136,4 +139,34 @@ public class DatabaseConnection {
             return false;
         }
     }
+
+    public List<LogEntry> findByUsername(String username) {
+        String sql = "SELECT * FROM log WHERE username = ?";
+        return jdbcTemplate.query(sql, new Object[]{username}, new LogEntryRowMapper());
+    }
+
+    public class LogEntryRowMapper implements RowMapper<LogEntry> {
+
+        @Override
+        public LogEntry mapRow(ResultSet resultSet, int rowNum) throws SQLException {
+            LogEntry logEntry = new LogEntry();
+            logEntry.setId(resultSet.getInt("id"));
+            logEntry.setUsername(resultSet.getString("username"));
+            logEntry.setTypeOfTransaction(resultSet.getString("type_of_transaction"));
+            logEntry.setAmount(resultSet.getBigDecimal("amount"));
+            logEntry.setDateTime(resultSet.getTimestamp("date_time").toLocalDateTime());
+            return logEntry;
+        }
+    }
+
+    public void addToLog(String username, double amount, String type){
+        String insertLogSql = "INSERT INTO log (username, type_of_transaction, amount, date_time) VALUES (?, ?, ?, ?)";
+        jdbcTemplate.update(insertLogSql, username, type, BigDecimal.valueOf(amount), LocalDateTime.now());
+    }
+
+    public void deleteUserLog(String username){
+        String deleteLogSql = "DELETE FROM log WHERE username = ?";
+        jdbcTemplate.update(deleteLogSql, username);
+    }
+
 }

@@ -1,6 +1,7 @@
 package com.ams.bankapp2.controller;
 
 import com.ams.bankapp2.database.DatabaseConnection;
+import com.ams.bankapp2.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,10 +12,12 @@ import org.springframework.web.bind.annotation.*;
 public class AdminController {
 
     private final DatabaseConnection databaseConnection;
+    private final UserService userService;
 
     @Autowired
-    public AdminController(DatabaseConnection databaseConnection) {
+    public AdminController(DatabaseConnection databaseConnection, UserService userService) {
         this.databaseConnection = databaseConnection;
+        this.userService = userService;
     }
 
     @GetMapping("/login")
@@ -62,7 +65,7 @@ public class AdminController {
 
     @PostMapping("/deleteUser")
     public String deleteUser(@RequestParam String username, Model model) {
-        boolean success = databaseConnection.deleteUser(username);
+        boolean success = userService.deleteUser(username);
         if (success) {
             model.addAttribute("message", "User deleted successfully");
         } else {

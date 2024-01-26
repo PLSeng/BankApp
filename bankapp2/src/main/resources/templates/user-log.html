@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>User Log</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to bottom, #0099cc, #0033cc);
+            animation: backgroundAnimation 10s linear infinite alternate;
+        }
+
+        @keyframes backgroundAnimation {
+            0% {
+                background: linear-gradient(to bottom, #0099cc, #0033cc);
+            }
+            100% {
+                background: linear-gradient(to bottom, #0033cc, #0099cc);
+            }
+        }
+
+        h1 {
+            color: #fff;
+            text-align: center;
+        }
+
+        .container {
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 800px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #0033cc;
+            color: #fff;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #ddd;
+        }
+    </style>
+</head>
+<body>
+<h1>User's Transaction History</h1>
+<div class="container">
+    <h2>Welcome, <span th:text="${user.username}"></span>!</h2>
+
+    <h3>Your Transaction History:</h3>
+
+    <table>
+        <thead>
+        <tr>
+            <th>Type of Transaction</th>
+            <th>Date/Time</th>
+            <th>Amount</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="logEntry : ${logEntries}">
+            <td th:text="${logEntry.typeOfTransaction}"></td>
+            <td th:text="${logEntry.dateTime}"></td>
+            <td th:text="${logEntry.amount}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <p><a href="/users/dashboard">Back to Dashboard</a></p>
+</div>
+</body>
+</html>
