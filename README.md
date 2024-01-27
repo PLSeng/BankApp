@@ -21,3 +21,5 @@ This Project was built under the school assignment project.
 [**Goto Spring Site**](https://amsbank.onrender.com)
 
 [**Visit our repository**](https://github.com/PLSeng/BankApp)
+
+[**Our Slide**](https://www.canva.com/design/DAF6wtjOh9I/HwVXZvtLxBLeSb8biOzjyQ/view)
