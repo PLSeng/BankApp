@@ -23,3 +23,5 @@ This Project was built under the school assignment project.
 [**Visit our repository**](https://github.com/PLSeng/BankApp)
 
 [**Our Slide**](https://www.canva.com/design/DAF6wtjOh9I/HwVXZvtLxBLeSb8biOzjyQ/view)
+
+[**Our Presentation Video**](https://itcedukh-my.sharepoint.com/:v:/g/personal/e20211548_dtc1_itc_edu_kh/EeS-4tHfQblBqmld9679QLkBeejpH1IkuL3DQtJ4K_yuAA?e=juVHBX)
